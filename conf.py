@@ -28,7 +28,6 @@ release = version
 #
 
 extensions = [
-    "extensions",
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
@@ -105,6 +104,11 @@ spelling_ignore_pypi_package_names = True
 latex_documents = [
     (master_doc, htmlhelp_basename + ".tex", full_title, author, "manual"),
 ]
+latex_elements = {
+    'preamble': r'''
+        \DeclareUnicodeCharacter{279C}{➜}
+    ''',
+}
 
 #
 # -- Options for manual page output -------------------------------------------
