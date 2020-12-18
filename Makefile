@@ -14,9 +14,6 @@ PORT = 9001
 # list the targets that we don't want confused with files in the directory
 .PHONY: help install clean run Makefile
 
-SCREENOPTS = -D latex_elements.pointsize=12pt -D latex_elements.classoptions=,openany,oneside -D latex_elements.preamble=\\usepackage{mfgan} -D pygments_style=my_pygment_style.BookStyle -D code_example_wrap=67
-LATEX-NAME = music-for-geeks-and-nerds
-
 # "help" is first so that "make" without an argument acts like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
@@ -43,6 +40,9 @@ run:
 
 html:
 	. $(VENV); $(SPHINXBUILD) -b html . _build/html
+
+latex:
+	sphinx-autobuild $(ALLSPHINXOPTS) -b latex . _build/latex 
 
 test:
 	. $(VENV); sphinx-build -b html . _build/html

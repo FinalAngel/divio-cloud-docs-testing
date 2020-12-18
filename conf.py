@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath("."))
 project = "Developer Handbook"
 full_title = project + " Documentation"
 copyright = "2017-2020, Divio"
-author = "Daniele Procida"
+author = "Divio Technologies AB"
 version = "1.0"
 release = version
 
@@ -36,26 +36,7 @@ extensions = [
     "sphinx_inline_tabs",
 ]
 
-if "spelling" in sys.argv:
-    extensions.append("sphinxcontrib.spelling")
-
 mermaid_version="8.5.2"
-
-#
-# -- Options for intersphinx --------------------------------------------------
-#
-
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-    "django": (
-        "https://docs.djangoproject.com/en/2.2/",
-        "https://docs.djangoproject.com/en/2.2/_objects/"
-    ),
-    "django-cms": ("http://docs.django-cms.org/en/latest/", None),
-    "celery": ("https://docs.celeryproject.org/en/stable/", None),
-    "whitenoise": ("https://whitenoise.evans.io/en/stable/", None),
-    "flask": ("https://flask.palletsprojects.com/en/master/", None),
-}
 
 #
 # -- Options for the theme ----------------------------------------------------
@@ -90,38 +71,31 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "env"]
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 
 #
-# -- Options for spelling -----------------------------------------------------
-#
-
-spelling_lang = "en_GB"
-spelling_word_list_filename = "spelling_wordlist"
-spelling_ignore_pypi_package_names = True
-
-#
 # -- Options for latex output -------------------------------------------------
 #
 
+latex_engine = "xelatex"
 latex_documents = [
     (master_doc, htmlhelp_basename + ".tex", full_title, author, "manual"),
 ]
+
 latex_elements = {
-    'preamble': r'''
-        \DeclareUnicodeCharacter{279C}{➜}
-    ''',
+    "papersize": "a4paper",
+    "fontpkg": r"""
+        \setmainfont{Nunito}
+        \setsansfont{Nunito}
+        \newfontfamily\sbfseries{Nunito Bold}
+        \newfontfamily\lfseries{Nunito Light}
+        \newfontfamily\elfseries{Nunito Light}
+    """,
+    "fncychap": "",
+    "sphinxsetup": r"TitleColor={RGB}{0,187,255}, HeaderFamily=\bfseries",
+    "preamble": r"""
+        \usepackage[titles]{tocloft}
+        \cftsetpnumwidth {1.25cm}\cftsetrmarg{1.5cm}
+        \setlength{\cftchapnumwidth}{0.75cm}
+        \setlength{\cftsecindent}{\cftchapnumwidth}
+        \setlength{\cftsecnumwidth}{1.25cm}
+        \definecolor{divio}{RGB}{0,187,255}
+    """,
 }
-
-#
-# -- Options for manual page output -------------------------------------------
-#
-
-man_pages = [
-    (master_doc, htmlhelp_basename, full_title, [author], 1)
-]
-
-#
-# -- Options for TODOs --------------------------------------------------------
-#
-
-todo_include_todos = False
-todo_link_only = True
-todo_emit_warnings = True
